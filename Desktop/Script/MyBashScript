@@ -1,0 +1,29 @@
+#!/bin/bash
+counter=1
+if ! [ "$#" -eq "0" ]
+then
+  rm -rf ./$1 2> /dev/null
+  mkdir ./$1 2> /dev/null
+  for param in "$@"
+  do
+    if (( counter == 2 ))
+    then
+      counter=3
+    else
+      if (( counter == 1 ))
+      then
+        counter=2
+      else
+        IFS=$'\n'
+        searcher=`find $HOME -name "*.$param" 2> /dev/null`
+        if ! [[ -z $searcher ]]
+        then
+          cp --parents $searcher ./$1/ 2> /dev/null
+        fi
+      fi
+    fi
+  done
+  tar --create --file $2.tar ./$1/
+fi
+echo "done"
+
