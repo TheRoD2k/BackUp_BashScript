@@ -1,2 +1,2 @@
-# hello-world
-My first repo
+# BackUp_BashScript
+Script for making needed files' backup
